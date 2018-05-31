@@ -1,1 +1,10 @@
 <!--View associated to users action of Organizations controller -->
+<h3 class="ui header">
+    <i class="ui user icon"></i>
+    <div class="content">{{title}}</div>
+</h3>
+<div class="ui four columns grid">
+{% for user in users %}
+    <div class="column"><span class="ui label"><i class="ui user icon"></i> {{ user | raw }}</span></div>
+{% endfor %}
+</div>

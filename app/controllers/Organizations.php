@@ -4,9 +4,11 @@ namespace controllers;
  
 
  use Ubiquity\orm\DAO;
+use Ajax\php\ubiquity\JsUtils;
 
  /**
  * Controller Organizations
+ * @property JsUtils $jquery
  **/
 class Organizations extends ControllerBase{
 
@@ -15,18 +17,22 @@ class Organizations extends ControllerBase{
 		$this->loadView("Organizations/index.html",["orgas"=>$organisations]);
 	}
 
-	public function Display($idOrga){
-		$orga=DAO::getOne("models\\Organization");
-		
-		$this->loadView('Organizations/Display.html');
-
+	public function display($idOrga,$idGroupe=null){
+		$orga=DAO::getOne("models\\Organization",$idOrga, true, true);
+		$users=$this->users($orga->getUsers(),$idOrga,$idGroupe);
+		$this->jquery->renderView("Organizations/Display.html",["orga"=>$orga,"users"=>$users]);
 	}
 
 
-	public function users($users){
-		$title="Tous les utilisateurs";
-		$this->loadView('Organizations/users.html');
-
+	protected function users($users=null,$idOrga,$idGroupe=null){
+		if(isset($idGroupe)){
+			$group=DAO::getOne("models\\Groupe",$idGroupe,true,true);
+			$title=$group->getName();
+			$users=DAO::getManyToMany($group, "users");
+		}else{
+			$title="Tous les utilisateurs";
+		}
+		return $this->loadView("Organizations/users.html",compact("users","title"),true);
 	}
 
-}
+} 

@@ -12,12 +12,13 @@
         </h3>
         <ul>
         {% for groupe in orga.groupes %}
-            <li>{{ groupe }}</li>
-        {% endfor %}
+		<li><a href="Organizations/display/{{orga.id}}/{{groupe.id}}" data-target="#users">{{ groupe }}</a></li>       
+		{% endfor %}
         </ul>
     </div>
     <div class="twelve wide column">
         <div id="users">
+        	{{users | raw}}
         </div>
     </div>
 </div>
