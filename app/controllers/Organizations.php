@@ -1,8 +1,8 @@
 <?php
 namespace controllers;
 
- 
-
+use Ubiquity\controllers\auth\AuthController;
+use Ubiquity\controllers\auth\WithAuthTrait;
  use Ubiquity\orm\DAO;
 use Ajax\php\ubiquity\JsUtils;
 
@@ -11,6 +11,7 @@ use Ajax\php\ubiquity\JsUtils;
  * @property JsUtils $jquery
  **/
 class Organizations extends ControllerBase{
+	use WithAuthTrait;
 
 	public function index(){
 		$organisations=DAO::getALL("models\\Organization");
@@ -34,5 +35,10 @@ class Organizations extends ControllerBase{
 		}
 		return $this->loadView("Organizations/users.html",compact("users","title"),true);
 	}
+	
+	protected function getAuthController(): AuthController {
+		return new AuthExt();
+	}
+	
 
 } 
