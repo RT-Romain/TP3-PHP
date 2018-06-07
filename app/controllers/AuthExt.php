@@ -3,6 +3,7 @@
 namespace controllers;
 use controllers\auth\files\AuthExtFiles;
 use Ubiquity\controllers\auth\AuthFiles;
+use Ubiquity\utils\http\USession;
 
  /**
  * Auth Controller AuthExt
@@ -63,4 +64,13 @@ class AuthExt extends \controllers\TestAuth{
 	$this->_setLoginCaption("Reviens tu nous manques déjà :( ");
 	}
 	
+	
+	public function _checkConnectionTimeout() {
+		return 10000;
+	}
+	
+	
+	protected function attemptsNumber() {
+		return 3;
+	}
 }

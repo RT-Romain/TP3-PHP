@@ -1,0 +1,20 @@
+{% extends "@framework/crud/form.html" %}
+{% block _before %}
+{% endblock %}
+{% block btAddNew %}
+    <a id="btAddNew" class="ui button red">
+     <i class="icon plus"></i>
+    Ajouter un groupe...
+    </a>
+{% endblock %}
+{% block _before %}
+	{{ parent() }}
+{% endblock %}
+{% block _after %}
+	{{ parent() }}
+{% endblock %}
+{% block _script_foot %}
+	{{ parent() }}
+{% endblock %}
+{% block _after %}
+{% endblock %}
